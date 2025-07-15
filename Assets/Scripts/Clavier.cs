@@ -12,14 +12,11 @@ public class Clavier : MonoBehaviour
         foreach (Button bouton in boutonsLettre)
         {
             string lettreLocal = bouton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text;
-
+            
             bouton.onClick.AddListener(() =>
             {
-                Debug.Log("Lettre cliquée : " + lettreLocal);
                 gameManager.JouerLettre(lettreLocal[0]);
-                OnLettreCliquee(lettreLocal[0]);
                 bouton.interactable = false;
-                
             });
         }
     }

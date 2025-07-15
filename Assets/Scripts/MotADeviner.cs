@@ -40,7 +40,7 @@ public class MotADeviner : MonoBehaviour
             if (lettresTrouvees.Contains(c))
                 affichage.Append(c + " ");
             else
-                affichage.Append(" ");
+                affichage.Append("_ ");
         }
 
         return affichage.ToString().TrimEnd();

@@ -20,5 +20,4 @@ public class Dictionnaire : MonoBehaviour
         int index = UnityEngine.Random.Range(0, mots.Count);
         return mots[index];
     }
-
 }

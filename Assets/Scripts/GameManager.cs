@@ -2,12 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public Dictionnaire dictionnaire;
     public MotADeviner motADeviner;
     public UIManager uiManager;
+    private int nbErreurs = 0;
+    private int maxErreurs = 8;
+    private bool jeuTermine = false;
+    public PenduAffichage penduAffichage;
+    public GameObject boutonRejouer;
+
+
+
 
     void Start()
     {
@@ -30,11 +39,35 @@ public class GameManager : MonoBehaviour
 
         if (motADeviner.EstTrouve())
         {
-            uiManager.AfficherMessage("🎉 Gagné !");
+            uiManager.AfficherMessage("Gagné !");
+            AfficherBoutonRestart(true);
+
         }
         else if (!bonneLettre)
         {
-            // Incrémenter le nombre d’erreurs
+            nbErreurs++;
+            
+            // 👇 Active une étape du pendu
+            penduAffichage.AfficherEtape(nbErreurs - 1);
+
+            if (nbErreurs >= maxErreurs)
+            {
+                jeuTermine = true;
+                uiManager.AfficherMessage("Perdu ! Le mot était : " + motADeviner.GetMotSecret());
+                AfficherBoutonRestart(true);
+
+                // Afficher le pendu final
+            }
         }
     }
+    
+    public void AfficherBoutonRestart(bool afficher)
+    {
+        boutonRejouer.SetActive(afficher);
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }
