@@ -6,7 +6,7 @@ public class Clavier : MonoBehaviour
 {
     public GameManager gameManager;
     public Button[] boutonsLettre;
-
+   
     void Start()
     {
         foreach (Button bouton in boutonsLettre)

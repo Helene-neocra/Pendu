@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class MotADeviner : MonoBehaviour
 {
     private string motSecret;
     private HashSet<char> lettresTrouvees = new HashSet<char>();
+    [SerializeField]
+    private AudioSource audioEffect;
 
     // Initialise le mot secret
     public void Initialiser(string mot)
@@ -24,6 +27,7 @@ public class MotADeviner : MonoBehaviour
         if (motSecret.Contains(lettre))
         {
             lettresTrouvees.Add(lettre);
+            audioEffect.Play(); // Joue un son si la lettre est correcte
             return true;
         }
 
@@ -54,7 +58,6 @@ public class MotADeviner : MonoBehaviour
             if (!lettresTrouvees.Contains(c))
                 return false;
         }
-
         return true;
     }
 

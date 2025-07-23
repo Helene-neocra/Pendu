@@ -15,18 +15,15 @@ public class GameManager : MonoBehaviour
     public PenduAffichage penduAffichage;
     public GameObject boutonRejouer;
 
-
-
-
     void Start()
     {
         string motChoisi = dictionnaire.ChoisirMot();
         motADeviner.Initialiser(motChoisi);
     
-        // ✅ Affiche le mot masqué dans le bon champ
+        // Affiche le mot masqué dans le bon champ
         uiManager.AfficherMot(motADeviner.GetAffichageMot());
 
-        // ✅ Efface l'ancien message
+        // Efface l'ancien message
         uiManager.AfficherMessage("Bienvenue dans le jeu du Pendu !");
 
     }
