@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Méthode appelée par le clavier pour jouer une lettre
-    public void JouerLettre(char lettre)
+    public bool JouerLettre(char lettre)
     {
         bool bonneLettre = motADeviner.ProposerLettre(lettre);
         uiManager.AfficherMot(motADeviner.GetAffichageMot());
@@ -38,12 +38,10 @@ public class GameManager : MonoBehaviour
         {
             uiManager.AfficherMessage("Gagné !");
             AfficherBoutonRestart(true);
-
         }
         else if (!bonneLettre)
         {
             nbErreurs++;
-            
             // 👇 Active une étape du pendu
             penduAffichage.AfficherEtape(nbErreurs - 1);
 
@@ -52,10 +50,10 @@ public class GameManager : MonoBehaviour
                 jeuTermine = true;
                 uiManager.AfficherMessage("Perdu ! Le mot était : " + motADeviner.GetMotSecret());
                 AfficherBoutonRestart(true);
-
                 // Afficher le pendu final
             }
         }
+        return bonneLettre;
     }
     
     public void AfficherBoutonRestart(bool afficher)

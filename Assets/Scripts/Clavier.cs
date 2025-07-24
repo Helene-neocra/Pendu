@@ -12,13 +12,30 @@ public class Clavier : MonoBehaviour
         foreach (Button bouton in boutonsLettre)
         {
             string lettreLocal = bouton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text;
-            
             bouton.onClick.AddListener(() =>
             {
-                gameManager.JouerLettre(lettreLocal[0]);
-                bouton.interactable = false;
+                bool bonneLettre = gameManager.JouerLettre(lettreLocal[0]);
+                var image = bouton.GetComponent<Image>();
+                if (image != null)
+                {
+                    if (bonneLettre)
+                    {
+                        image.color = Color.green;
+                    }
+                    else
+                    {
+                        image.color = Color.red;
+                    }
+                    bouton.onClick.RemoveAllListeners(); // Empêche un second clic
+                }
             });
         }
+    }
+
+    private System.Collections.IEnumerator DesactiverBoutonApresDelai(Button bouton, float delai)
+    {
+        yield return new WaitForSeconds(delai);
+        bouton.interactable = false;
     }
     
     void OnLettreCliquee(char lettre)
