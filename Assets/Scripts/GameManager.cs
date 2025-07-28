@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private bool jeuTermine = false;
     public PenduAffichage penduAffichage;
     public GameObject boutonRejouer;
-
+    public Clavier clavier;
     void Start()
     {
         string motChoisi = dictionnaire.ChoisirMot();
@@ -31,13 +31,18 @@ public class GameManager : MonoBehaviour
     // Méthode appelée par le clavier pour jouer une lettre
     public bool JouerLettre(char lettre)
     {
+        if (jeuTermine)
+            return false; // On ne joue plus si le jeu est terminé
         bool bonneLettre = motADeviner.ProposerLettre(lettre);
         uiManager.AfficherMot(motADeviner.GetAffichageMot());
+        //clavier.DesactiverClavier();
 
         if (motADeviner.EstTrouve())
         {
+            jeuTermine = true;
             uiManager.AfficherMessage("Gagné !");
             AfficherBoutonRestart(true);
+            clavier.DesactiverClavier();
         }
         else if (!bonneLettre)
         {
@@ -50,7 +55,7 @@ public class GameManager : MonoBehaviour
                 jeuTermine = true;
                 uiManager.AfficherMessage("Perdu ! Le mot était : " + motADeviner.GetMotSecret());
                 AfficherBoutonRestart(true);
-                // Afficher le pendu final
+                clavier.DesactiverClavier();
             }
         }
         return bonneLettre;

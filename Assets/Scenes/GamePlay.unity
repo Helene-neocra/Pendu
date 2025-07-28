@@ -4955,6 +4955,7 @@ MonoBehaviour:
   uiManager: {fileID: 1679482569}
   penduAffichage: {fileID: 502480005}
   boutonRejouer: {fileID: 101239353}
+  clavier: {fileID: 255595273}
 --- !u!4 &1974028267
 Transform:
   m_ObjectHideFlags: 0

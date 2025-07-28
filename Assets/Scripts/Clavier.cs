@@ -43,4 +43,12 @@ public class Clavier : MonoBehaviour
         Debug.Log("Lettre cliquée : " + lettre);
         gameManager.JouerLettre(lettre);
     }
+    
+    public void DesactiverClavier()
+    {
+        foreach (Button bouton in boutonsLettre)
+        {
+            bouton.interactable = false;
+        }
+    }
 }
