@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class Clavier : MonoBehaviour
 {
     public GameManager gameManager;
     public Button[] boutonsLettre;
-   
     void Start()
     {
         foreach (Button bouton in boutonsLettre)
@@ -31,19 +29,6 @@ public class Clavier : MonoBehaviour
             });
         }
     }
-
-    private System.Collections.IEnumerator DesactiverBoutonApresDelai(Button bouton, float delai)
-    {
-        yield return new WaitForSeconds(delai);
-        bouton.interactable = false;
-    }
-    
-    void OnLettreCliquee(char lettre)
-    {
-        Debug.Log("Lettre cliquée : " + lettre);
-        gameManager.JouerLettre(lettre);
-    }
-    
     public void DesactiverClavier()
     {
         foreach (Button bouton in boutonsLettre)
